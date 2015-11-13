@@ -14,13 +14,19 @@ var {
 } = React;
 
 var Demographic1 = React.createClass ({
+  addInfo: function() {
+    var currentUser = Parse.User.current();
+    currentUser.save({
+      test: 2
+    });
+  },
 
   render: function() {
     return (
       <View style={styles.bodyView}>
         <Text style={styles.back}> Page 1 </Text>
-        <TouchableHighlight style={styles.back}>
-          <Text> Add test: 2 </Text>
+        <TouchableHighlight style={styles.backButton} onPress={this.addInfo}>
+          <Text style={styles.back}> Add test: 2 </Text>
         </TouchableHighlight>
       </View>
       );

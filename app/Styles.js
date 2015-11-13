@@ -24,14 +24,6 @@ var Styles=StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  back: {
-    fontFamily: 'marker felt',
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: yellow,
-    backgroundColor: black,
-    alignSelf: 'center',
-  },
   headerView: {
     flexDirection: 'row',
     flex: 1,
@@ -145,6 +137,22 @@ var Styles=StyleSheet.create({
     backgroundColor: yellow,
     fontFamily: 'marker felt',
   },
+  mainPageFooter: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: black,
+    height: 100,
+  },
+  unchosen: {
+    fontFamily: 'marker felt',
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'gray',
+    backgroundColor: black,
+    alignSelf: 'center',
+  }
 });
 
 module.exports = Styles;

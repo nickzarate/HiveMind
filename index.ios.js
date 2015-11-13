@@ -44,7 +44,7 @@ var hivemind = React.createClass ({
      if (currentUser) {
        return (
          <Navigator
-           initialRoute={{id: 1}}
+           initialRoute={{id: 3}}
            renderScene={this._renderScene} />
        );
      } else {

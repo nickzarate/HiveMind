@@ -24,10 +24,10 @@ var EnterLoginInformation = React.createClass ({
 
   getInitialState: function() {
     return {
-        username: '',
-        email: '',
-        password: '',
-      };
+      username: '',
+      email: '',
+      password: '',
+    };
   },
 
   goBack: function() {
