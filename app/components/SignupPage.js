@@ -1,25 +1,49 @@
  'use-strict'
 
 var React = require('react-native');
-//var EnterEmailAddress = require('./EnterEmailAddress2');
+var styles = require('hivemind/app/Styles');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
-var styles=require('hivemind/app/Styles');
+var UsernameInput = require('./UsernameInput');
+var PasswordInput = require('./PasswordInput');
+var Line = require('./Line');
+//var {Icon,} = require('react-native-icons');
 
 var FBSDKLogin = require('hivemind/node_modules/react-native-fbsdklogin');
 var {
-  FBSDKLoginButton
+  FBSDKLoginButton,
+  FBSDKLoginManager,
 } = FBSDKLogin;
 var FBSDKCore = require('hivemind/node_modules/react-native-fbsdkcore');
 var {
-  FBSDKAccessToken
+  FBSDKAccessToken,
+  FBSDKGraphRequest,
 } = FBSDKCore;
+var token2;
 
+//EXAMPLE FOR GETTING A USERS CHARACTERISTCS : (age-range)
+
+var fetchFriendsRequest = new FBSDKGraphRequest((error, result) => {
+  if (error) {
+    alert('Error making request.');
+  } else {
+    console.log(result);
+  }
+}, '/me/?fields=age_range');
+
+//EXAMPLE FOR GETTING A USERS ACCESS TOKEN
+
+FBSDKAccessToken.getCurrentAccessToken(token => {
+  if (token) {
+    token2 = token
+  }
+});
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
 
 var {
   View,
   Text,
+  Image,
   Navigator,
   TextInput,
   StyleSheet,
@@ -27,34 +51,27 @@ var {
 } = React;
 
 
+// <FBSDKLoginButton
+//             onLoginFinished={(error, result) => {
+//               if (error) {
+//                 alert('Error logging in.');
+//               } else {
+//                 if (result.isCancelled) {
+//                   alert('Login cancelled.');
+//                 } else {
+//                   //fetchFriendsRequest.start();
+//                   this.props.navigator.push({id: 3});
+//                 }
+//               }
+//             }}
+//             // onLogoutFinished={}
+//             readPermissions={['public_profile']}
+//             publishPermissions={[]}
+//           />
 
-
-// Parse.FacebookUtils.init({ // this line replaces FB.init({
-//       appId      : '520219378144945', // Facebook App ID
-//       status     : true,  // check Facebook Login status
-//       cookie     : true,  // enable cookies to allow Parse to access the session
-//       xfbml      : true,  // initialize Facebook social plugins on the page
-//       version    : 'v2.5' // point to the latest Facebook Graph API version
-//     });
-//     Parse.FacebookUtils.logIn(null, {
-//       success: function(user) {
-//         if (!user.existed()) {
-//           alert("User signed up and logged in through Facebook!");
-//         } else {
-//           alert("User logged in through Facebook!");
-//         }
-//       },
-//       error: function(user, error) {
-//         alert("User cancelled the Facebook login or did not fully authorize.");
-//       }
-//     });
-
- // <TouchableHighlight style={styles.button} onPress={this.loginWithFacebook}>
- //            <Text style={styles.signUpButtonText}> Sign in with Facebook </Text>
- //          </TouchableHighlight>
-
- 
-
+// <TouchableHighlight style={styles.button} onPress={this._handlePress}>
+//             <Text style={styles.signUpButtonText}> Sign in with Email Address </Text>
+//           </TouchableHighlight>
 
 
 
@@ -64,12 +81,19 @@ var SignupPage = React.createClass({
     this.props.navigator.push({id: 2})
   },
 
-  login: function() {
-    console.log("sign in with facebook!");
-  },
-
-  loginWithFacebook: function() {
-    
+  _handleFacebookPress: function() {
+    //FBSDKLoginManager.setLoginBehavior(GlobalStore.getItem('behavior', 'native'));
+    FBSDKLoginManager.logInWithReadPermissions([], (error, result) => {
+      if (error) {
+        alert('Error logging in.');
+      } else {
+        if (result.isCanceled) {
+          alert('Login cancelled.');
+        } else {
+          this.props.navigator.push({id: 3});
+        }
+      }
+    });
   },
 
   render: function() {
@@ -79,25 +103,21 @@ var SignupPage = React.createClass({
           <Text style={styles.titleText}> HIVEMIND </Text>
         </View>
         <View style={styles.smallBlackContainer}>
-          <FBSDKLoginButton
-           onLoginFinished={(error, result) => {
-             if (error) {
-               alert('Error logging in.');
-             } else {
-               if (result.isCancelled) {
-                 alert('Login cancelled.');
-               } else {
-                 alert('Logged in.');
-               }
-             }
-           }}
-           onLogoutFinished={() => alert('Logged out.')}
-           readPermissions={['public_profile']}
-           publishPermissions={[]} />
+          <UsernameInput/>
+          <PasswordInput/>
+          <Text style={styles.disclosureText}>If you don't have an account we'll create one for you!</Text>
 
-          <TouchableHighlight style={styles.button} onPress={this._handlePress}>
-            <Text style={styles.signUpButtonText}> Sign in with Email </Text>
+          <View style={styles.rowContainer}>
+            <Image source={require('./line.png')} style={styles.leftLine}/>
+            <Text style={styles.orText}> OR </Text>
+            <Image source={require('./line.png')} style={styles.rightLine}/>
+          </View>
+
+          <TouchableHighlight style={styles.blueButton} onPress={this._handleFacebookPress}>
+            <Text style={styles.signUpButtonTextBlue}> Sign in with Facebook </Text>
           </TouchableHighlight>
+
+          
         </View>
       </View>
     );

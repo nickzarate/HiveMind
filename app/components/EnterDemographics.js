@@ -40,7 +40,7 @@ var EnterDemographics = React.createClass ({
     return (
       <View>
         <ProgressBar progressIndex={this.state.progressIndex} />
-        <DemographicQuestions style={styles.bodyView} progressIndex={this.state.progressIndex} />
+        <DemographicQuestions progressIndex={this.state.progressIndex} />
         <Footer progressIndex={this.state.progressIndex} numBars={4} onProgressChange={this.handleProgressChange} enterMain={this.enterMain} />
       </View>
     );

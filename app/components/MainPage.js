@@ -22,6 +22,14 @@ var MainPage = React.createClass ({
     };
   },
 
+  switchToCategory: function(category) {
+    if (category === 1) {
+      this.props.navigator.push({id: 5})
+    } else if (category === 2) {
+      this.props.navigator.push({id: 6})
+    }
+  },
+
   switchScreen: function(mainScreen) {
     this.setState ({
       mainScreen: mainScreen,
@@ -35,8 +43,8 @@ var MainPage = React.createClass ({
     }
     return (
       <View>
-        <Component />
-        <MainPageFooter mainScreen={this.state.mainScreen} onScreenChange={this.switchScreen} />
+        <Component health={this.switchToCategory}/>
+        <MainPageFooter mainScreen={this.state.mainScreen} onScreenChange={this.switchScreen}/>
       </View>
     );
   }

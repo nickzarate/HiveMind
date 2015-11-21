@@ -80,7 +80,7 @@ var EnterLoginInformation = React.createClass ({
           <Text style={styles.back}> BACK </Text>
         </TouchableHighlight>
         <TextInput
-          style={styles.input}
+          style={styles.loginInput}
           placeholder=' Email'
           value={this.state.username}
           onChange={this.handleEmailChange}
@@ -90,7 +90,7 @@ var EnterLoginInformation = React.createClass ({
           keyboardType={'email-address'} />
 
         <TextInput
-          style={styles.input}
+          style={styles.loginInput}
           placeholder=' Password'
           onSubmitEditing={this.captureUser}
           value={this.state.password}

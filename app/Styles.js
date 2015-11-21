@@ -1,7 +1,13 @@
 'use-strict'
 var React = require('react-native');
-var yellow = '#EDF518';
-var black = '#202100';
+var yellow = '#FFFC31';
+var black = '#393E41';
+var red = '#E94F37';
+var purple = '#5C415D';
+var white = '#F6F7EB';
+var blue = '#3B5998'
+//var yellow = '#EDF518';
+//var black = '#202100';
 
 var {
   StyleSheet,
@@ -9,24 +15,37 @@ var {
 
 
 var Styles=StyleSheet.create({
-  container: {
+  activated: {
     flex: 1,
+    borderWidth: 3,
+    borderColor: black,
+    backgroundColor: yellow,
   },
-  blackContainer: {
-    flex: 1,
-    height: 800,
+  answer: {
     backgroundColor: black,
-  },
-  bodyView: {
-    flex: 1,
-    backgroundColor: black,
-    height: 650,
-    alignItems: 'center',
+    borderColor: yellow,
+    borderRadius: 15,
+    borderWidth: 1,
+    padding: 5,
+    width: 110,
+    height: 123,
     justifyContent: 'center',
   },
-  headerView: {
-    flexDirection: 'row',
-    flex: 1,
+  answerText: {
+    fontFamily: 'helvetica neue',
+    fontSize: 20,
+    color: yellow,
+    backgroundColor: black,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  back: {
+    fontFamily: 'helvetica neue',
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: yellow,
+    backgroundColor: black,
+    alignSelf: 'center',
   },
   backButton: {
     backgroundColor: black,
@@ -34,53 +53,39 @@ var Styles=StyleSheet.create({
     borderWidth: 0,
     padding: 5,
     width: 110,
-    height: 60
+    height: 60,
   },
-  back: {
-    fontFamily: 'marker felt',
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: yellow,
+  beesWaxHeader: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
     backgroundColor: black,
-    alignSelf: 'center',
+    padding: 10,
+    height: 30,
   },
-  icon: {
-    height: 15,
+  beesWaxHeaderVertical: {
+    backgroundColor: black,
     width: 15,
   },
-  input: {
-    backgroundColor: yellow,
+  blackContainer: {
+    flex: 1,
+    height: 800,
+    backgroundColor: black,
+  },
+  blueButton: {
+    backgroundColor: blue,
     borderRadius: 15,
     borderWidth: 1,
-    paddingHorizontal: 15,
-    marginTop: 30,
+    borderColor: blue,
+    padding: 5,
+    marginTop: 60,
     marginBottom: 60,
-    height: 50,
-    fontFamily: 'marker felt',
-    fontWeight: 'bold',
-    fontSize: 26,
+    alignSelf: 'center',
   },
-  firstDemographic: {
+  bodyView: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    height: 650,
     backgroundColor: black,
-    height: 100,
-  },
-  otherDemographic: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: black,
-    height: 100,
-  },
-  buttonText: {
-    fontFamily: 'marker felt',
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: yellow,
-    backgroundColor: black,
-    height: 60
+    justifyContent: 'center',
   },
   btn: {
     backgroundColor: black,
@@ -91,19 +96,244 @@ var Styles=StyleSheet.create({
     height: 60,
     alignItems: 'center',
   },
-  activated: {
+  button: {
+    backgroundColor: red,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: red,
+    padding: 5,
+    marginTop: 60,
+    marginBottom: 60,
+    alignSelf: 'center',
+  },
+  buttonText: {
+    fontFamily: 'helvetica neue',
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: yellow,
+    backgroundColor: black,
+    height: 60
+  },
+  categoryButton: {
+    backgroundColor: black,
+    borderRadius: 15,
+    borderWidth: 0,
+    padding: 5,
+    width: 400,
+    height: 60,
+  },
+  categoryView: {
     flex: 1,
-    height: 25,
-    borderWidth: 3,
-    borderColor: black,
-    backgroundColor: yellow,
+    height: 650,
+    backgroundColor: black,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  container: {
+    flex: 1,
   },
   deactivated: {
     flex: 1,
-    height: 25,
+    //height: 25,
     borderWidth: 1,
     borderColor: yellow,
     backgroundColor: black,
+  },
+  disclosureText: {
+    color: 'white',
+    backgroundColor: black,
+    fontFamily: 'helvetica neue',
+    fontSize: 14,
+    marginLeft: 38,
+  },
+  firstDemographic: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    backgroundColor: black,
+    height: 100,
+  },
+  headerView: {
+    flexDirection: 'row',
+    height: 20,
+    backgroundColor: 'green',
+  },
+  healthHome: {
+    flex: 1,
+    height: 650,
+    backgroundColor: black,
+    marginTop: 50,
+    alignItems: 'center',
+  },
+  healthQuestionBodyView: {
+    backgroundColor: black,
+    height: 460,
+    justifyContent: 'flex-start',
+  },
+  healthQuestionAnswerView: {
+    backgroundColor: black,
+    height: 320,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  horizontalAnswer: {
+    flexDirection: 'row',
+    backgroundColor: black,
+    alignItems: 'flex-end',
+    marginLeft: 6,
+    marginRight: 10,
+  },
+  horizontalUserChar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 60,
+    //backgroundColor: 'green',
+  },
+  icon: {
+    height: 15,
+    width: 15,
+  },
+  iconTest: {
+    height: 50,
+    width: 70,
+    alignSelf: 'flex-start',
+    marginTop: 8,
+    marginLeft: 35,
+  },
+  iconVertical: {
+    height: 10,
+    width: 10,
+    marginBottom: 8,
+    marginLeft: 2,
+  },
+  input: {
+    backgroundColor: yellow,
+    borderRadius: 15,
+    borderWidth: 1,
+    paddingHorizontal: 15,
+    marginTop: 5,
+    marginBottom: 60,
+    height: 50,
+    fontFamily: 'helvetica neue',
+    fontWeight: 'bold',
+    fontSize: 26,
+    flex: 1,
+  },
+  inputTest: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    borderWidth: 1,
+    paddingLeft: 75,
+    height: 70,
+    width: 350,
+    fontFamily: 'helvetica neue',
+    fontWeight: 'bold',
+    fontSize: 22,
+    position: 'absolute',
+    marginLeft: 30,
+  },
+  leftLine: {
+    height: 1,
+    width: 130,
+    marginLeft: 20,
+  },
+  loginInput: {
+    backgroundColor: yellow,
+    borderRadius: 15,
+    borderWidth: 1,
+    paddingHorizontal: 15,
+    marginTop: 30,
+    marginBottom: 60,
+    height: 50,
+    fontFamily: 'helvetica neue',
+    fontWeight: 'bold',
+    fontSize: 26,
+  },
+  mainPageFooter: {
+    flex: 1,
+    height: 100,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: black,
+  },
+  mainPageView: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  orText: {
+    color: yellow,
+    backgroundColor: black,
+    fontFamily: 'helvetica neue',
+    fontSize: 30,
+    paddingHorizontal: 20,
+    alignSelf: 'center',
+  },
+  otherDemographic: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: black,
+    height: 100,
+  },
+  progressNode: {
+    flex: 25,
+  },
+  questionText: {
+    fontFamily: 'helvetica neue',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: yellow,
+    backgroundColor: black,
+    paddingHorizontal: 10,
+    paddingVertical: 30,
+    alignSelf: 'center',
+  },
+  rightLine: {
+    height: 1,
+    width: 130,
+    marginRight: 20,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    height: 1,
+    marginTop: 100,
+  },
+  signUpButtonText: {
+    fontSize: 18,
+    color: white,
+    backgroundColor: red,
+    fontFamily: 'helvetica neue',
+    paddingHorizontal: 25,
+    fontWeight: 'bold',
+    paddingVertical: 3,
+  },
+  signUpButtonTextBlue: {
+    fontSize: 18,
+    color: white,
+    backgroundColor: blue,
+    fontFamily: 'helvetica neue',
+    paddingHorizontal: 25,
+    fontWeight: 'bold',
+    paddingVertical: 3,
+  },
+  smallBlackContainer: {
+    backgroundColor: black,
+    height: 600,
+    justifyContent: 'center',
+  },
+  smallYellowContainer: {
+    backgroundColor: yellow,
+    alignItems: 'center',
+  },
+  infoText: {
+    fontFamily: 'helvetica neue',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: yellow,
+    backgroundColor: black,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   titleText: {
     fontSize: 75,
@@ -111,48 +341,27 @@ var Styles=StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 40,
     marginBottom: 40,
-    fontFamily: 'marker felt'
-  },
-  smallYellowContainer: {
-    backgroundColor: yellow,
-    alignItems: 'center',
-  },
-  smallBlackContainer: {
-    backgroundColor: black,
-    alignItems: 'center',
-    height: 600,
-    justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: yellow,
-    borderRadius: 15,
-    borderWidth: 1,
-    padding: 5,
-    marginTop: 60,
-    marginBottom: 60,
-  },
-  signUpButtonText: {
-    fontSize: 28,
-    color: black,
-    backgroundColor: yellow,
-    fontFamily: 'marker felt',
-  },
-  mainPageFooter: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: black,
-    height: 100,
+    fontFamily: 'helvetica neue'
   },
   unchosen: {
-    fontFamily: 'marker felt',
+    fontFamily: 'helvetica neue',
     fontWeight: 'bold',
     fontSize: 30,
     color: 'gray',
     backgroundColor: black,
     alignSelf: 'center',
-  }
+  },
+  userCharText: {
+    color: 'white',
+    backgroundColor: black,
+    fontSize: 20,
+    marginTop: 20,
+  },
+  usernameInput: {
+    flexDirection: 'row',
+    height: 72,
+    //backgroundColor: 'green',
+  },
 });
 
 module.exports = Styles;

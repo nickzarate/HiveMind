@@ -25,7 +25,6 @@ var Footer = React.createClass ({
   },
 
   render: function() {
-    console.log("in footer");
     if (this.props.progressIndex === 1) {
       return (
         <View style={styles.firstDemographic}>
@@ -35,7 +34,6 @@ var Footer = React.createClass ({
         </View>
       );
     } else if (this.props.progressIndex < this.props.numBars) {
-      console.log("progress index = not finished");
       return (
         <View style={styles.otherDemographic}>
           <TouchableHighlight style={styles.btn} onPress={this.previous}>
@@ -47,7 +45,6 @@ var Footer = React.createClass ({
         </View>
       );
     } else {
-      console.log("progress index = finished");
       return (
         <View style={styles.otherDemographic}>
           <TouchableHighlight style={styles.btn} onPress={this.previous}>
