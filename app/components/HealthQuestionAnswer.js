@@ -6,7 +6,7 @@ var ParseReact = require('parse-react');
 var styles = require('hivemind/app/Styles');
 var BeesWaxHeader = require('./BeesWaxHeader');
 var Answer = require('./Answer');
-var answerArray = [0,0,0,0,0,0];
+var answers = [0,0,0,0,0,0];
 
 var {
   View,
@@ -15,14 +15,36 @@ var {
 } = React;
 
 var HealthQuestionAnswer = React.createClass ({
+
+  componentDidMount: function() {
+    console.log("in health answer question did mount function");
+  },
+
   decrementWax: function(answerIndex) {
-    answerArray[answerIndex] += 1;
+    answers[answerIndex] += 1;
     this.props.onDecrement();
     if (this.props.numWax === 1) {
-      var points = answerArray[this.props.answer] * 50
+      var points = answers[this.props.answer] * 50;
       var currentUser = Parse.User.current();
       currentUser.increment("honey", points);
       currentUser.save();
+
+      var saveAnswer = function(healthAnswer) {
+        currentUser.get("answerHistory").add("healthData", healthAnswer);//answerHistory.healthData.add("healthAnswer", healthAnswer);                
+        currentUser.save();
+      };
+
+      var HealthAnswer = Parse.Object.extend("HealthAnswer");
+      var healthAnswer = new HealthAnswer();
+      healthAnswer.set("healthQuestion", this.props.questionPointer);
+      healthAnswer.set("answers", answers);
+      healthAnswer.save({
+        success: function(healthAnswer) {
+          saveAnswer(healthAnswer);
+        },
+        error: function(error) {
+        }
+      });
       this.props.onAnswered();
     }
   },

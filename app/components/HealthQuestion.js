@@ -17,40 +17,46 @@ var {
   TouchableHighlight,
 } = React;
 
-var Question = Parse.Object.extend("HealthQuestions");
-var query = new Parse.Query(Question);
-var index = 1 + Math.floor(Math.random()*2);
-console.log(index);
-query.equalTo("index", index);
-var name;
-var x1;
-var x2;
-var x3;
-var y;
-var answers = [];
-var answer;
+var questionPointer;
 
-query.first({
-  success: function(question) {
-    name = question.get("name");
-    x1 = question.get("x1");
-    x2 = question.get("x2");
-    x3 = question.get("x3");
-    y = question.get("y");
-    answers = question.get("answers");
-    answer = question.get("answer");
-    question.set("objectId", "1");
-    question.save();
-  },
-  error: function(object, error) {
-  }
-});
-
-var HealthHome = React.createClass ({
+var HealthQuestion = React.createClass ({
   getInitialState: function() {
     return {
       numWax: 6,
+      overall_health: 0,
+      weekly_exercise_minutes: 0,
+      answers: ["", "", "", "", "", ""],
+      answer: 5,
+      observationID: 0,
     };
+  },
+
+  componentDidMount: function() {
+
+    var updateState = function(question) {
+      questionPointer = question;
+      console.log("in update state!");
+      this.setState({
+        overall_health: question.get("overall_health"),
+        weekly_exercise_minutes: question.get("weekly_exercise_minutes"),
+        answers: question.get("answers"),
+        answer: question.get("answer"),
+        observationID: question.get("observationID"),
+      })
+    }.bind(this);
+
+    var HealthQuestion = Parse.Object.extend("HealthQuestion");
+    var query = new Parse.Query(HealthQuestion);
+    var observationID = 1 + Math.floor(Math.random() * 99);
+    query.equalTo("observationID", observationID);
+    query.first({
+      success: function(question) {
+        updateState(question);
+      },
+      error: function(object, error) {
+        alert("Couldn't find the object you were looking for");
+      }
+    });
   },
 
   decrementWax: function() {
@@ -69,12 +75,23 @@ var HealthHome = React.createClass ({
     return (
       <View>
         <BeesWaxHeader numWax={this.state.numWax}/>
-        <HealthQuestionBody name={name} x1={x1} x2={x2} x3={x3}/>
-        <HealthQuestionAnswer answers={answers} answer={answer}
-        onDecrement={this.decrementWax} numWax={this.state.numWax} onAnswered={this.goHome}/>
+
+        <HealthQuestionBody
+        weekly_exercise_minutes={this.state.weekly_exercise_minutes}
+        overall_health={this.state.overall_health}
+        observationID={this.state.observationID}/>
+
+        <HealthQuestionAnswer
+        answers={this.state.answers}
+        answer={this.state.answer}
+        numWax={this.state.numWax}
+        onDecrement={this.decrementWax}
+        onAnswered={this.goHome}
+        questionPointer={questionPointer}/>
+
       </View>
     );
   }
 });
 
-module.exports = HealthHome;
+module.exports = HealthQuestion;

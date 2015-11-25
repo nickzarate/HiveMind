@@ -12,16 +12,19 @@ var {
 } = React;
 
 
+// <Text style={styles.infoText}> Age: {this.props.x1} </Text>
+//         <Text style={styles.infoText}> Weight: {this.props.x2} </Text>
+//         <Text style={styles.infoText}> Height: {this.props.x3} </Text>
+
+
 var HealthQuestionBody = React.createClass ({
 
   render: function() {
     return (
       <View style={styles.healthQuestionBodyView}>
-        <Text style={styles.infoText}> Name: {this.props.name} </Text>
-        <Text style={styles.infoText}> Age: {this.props.x1} </Text>
-        <Text style={styles.infoText}> Weight: {this.props.x2} </Text>
-        <Text style={styles.infoText}> Height: {this.props.x3} </Text>
-        <Text style={styles.questionText}> Guess what {this.props.name}'s BMI is based on the given information. </Text>
+        <Text style={styles.infoText}> Minutes of weekly exercise: {this.props.weekly_exercise_minutes} </Text>
+        
+        <Text style={styles.questionText}> Guess what test subject #{this.props.observationID}'s self reported overall health is based on the given information. </Text>
       </View>
     );
   }

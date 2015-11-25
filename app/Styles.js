@@ -5,7 +5,9 @@ var black = '#393E41';
 var red = '#E94F37';
 var purple = '#5C415D';
 var white = '#F6F7EB';
-var blue = '#3B5998'
+var blue = '#3B5998';
+var gold = '#FFCC1F';
+var darkGold = '#DE6000'
 //var yellow = '#EDF518';
 //var black = '#202100';
 
@@ -49,14 +51,14 @@ var Styles=StyleSheet.create({
   },
   backButton: {
     backgroundColor: black,
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 0,
     padding: 5,
     width: 110,
     height: 60,
   },
   beesWaxHeader: {
-    alignItems: 'flex-start',
+    //alignItems: 'flex-start',
     flexDirection: 'row',
     backgroundColor: black,
     padding: 10,
@@ -73,19 +75,26 @@ var Styles=StyleSheet.create({
   },
   blueButton: {
     backgroundColor: blue,
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: blue,
     padding: 5,
-    marginTop: 60,
-    marginBottom: 60,
+    marginTop: 80,
+    marginBottom: 10,
     alignSelf: 'center',
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
   },
   bodyView: {
     flex: 1,
     height: 650,
     backgroundColor: black,
     justifyContent: 'center',
+  },
+  bodyy: {
+    color: 'green',
+    backgroundColor: 'red',
   },
   btn: {
     backgroundColor: black,
@@ -143,8 +152,8 @@ var Styles=StyleSheet.create({
     color: 'white',
     backgroundColor: black,
     fontFamily: 'helvetica neue',
-    fontSize: 14,
-    marginLeft: 38,
+    fontSize: 16,
+    paddingHorizontal: 20,
   },
   firstDemographic: {
     flex: 1,
@@ -192,6 +201,7 @@ var Styles=StyleSheet.create({
   icon: {
     height: 15,
     width: 15,
+    marginLeft: 5,
   },
   iconTest: {
     height: 50,
@@ -208,7 +218,7 @@ var Styles=StyleSheet.create({
   },
   input: {
     backgroundColor: yellow,
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 1,
     paddingHorizontal: 15,
     marginTop: 5,
@@ -221,14 +231,14 @@ var Styles=StyleSheet.create({
   },
   inputTest: {
     backgroundColor: 'white',
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 1,
     paddingLeft: 75,
     height: 70,
     width: 350,
     fontFamily: 'helvetica neue',
     fontWeight: 'bold',
-    fontSize: 22,
+    fontSize: 24,
     position: 'absolute',
     marginLeft: 30,
   },
@@ -237,9 +247,23 @@ var Styles=StyleSheet.create({
     width: 130,
     marginLeft: 20,
   },
+  loginButton: {
+    borderWidth: 0,
+    borderRadius: 10,
+    backgroundColor: gold,
+    alignSelf: 'center',
+    height: 70,
+    width: 350,
+    justifyContent: 'center',
+    marginTop: 20,
+    shadowColor: darkGold,
+    shadowOffset: {height: 5},
+    shadowOpacity: .7,
+    overflow: 'hidden',
+  },
   loginInput: {
     backgroundColor: yellow,
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 1,
     paddingHorizontal: 15,
     marginTop: 30,
@@ -248,6 +272,20 @@ var Styles=StyleSheet.create({
     fontFamily: 'helvetica neue',
     fontWeight: 'bold',
     fontSize: 26,
+  },
+  loginText: {
+    color: darkGold,
+    backgroundColor: gold,
+    fontFamily: 'helvetica neue',
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 5,
+    alignSelf: 'center',
+    //width: 350,
+    //height: 70,
+    shadowOpacity: .5,
+    shadowOffset: {height: 5},
+    shadowColor: darkGold,
   },
   mainPageFooter: {
     flex: 1,
@@ -262,12 +300,14 @@ var Styles=StyleSheet.create({
     justifyContent: 'space-between',
   },
   orText: {
-    color: yellow,
+    color: gold,
     backgroundColor: black,
     fontFamily: 'helvetica neue',
     fontSize: 30,
+    fontWeight: 'bold',
     paddingHorizontal: 20,
     alignSelf: 'center',
+    marginTop: 20,
   },
   otherDemographic: {
     flex: 1,
@@ -275,6 +315,10 @@ var Styles=StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: black,
     height: 100,
+  },
+  passwordInput: {
+    flexDirection: 'row',
+    height: 72,
   },
   progressNode: {
     flex: 25,
@@ -296,8 +340,9 @@ var Styles=StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    height: 1,
-    marginTop: 100,
+    height: 20,
+    marginTop: 20,
+    justifyContent: 'space-between',
   },
   signUpButtonText: {
     fontSize: 18,
@@ -309,13 +354,22 @@ var Styles=StyleSheet.create({
     paddingVertical: 3,
   },
   signUpButtonTextBlue: {
-    fontSize: 18,
+    fontSize: 20,
     color: white,
     backgroundColor: blue,
     fontFamily: 'helvetica neue',
     paddingHorizontal: 25,
     fontWeight: 'bold',
     paddingVertical: 3,
+    alignSelf: 'center',
+  },
+  signUpText: {
+    alignSelf: 'center',
+    fontFamily: 'helvetica neue',
+    fontSize: 18,
+    color: gold,
+    backgroundColor: black,
+    padding: 5,
   },
   smallBlackContainer: {
     backgroundColor: black,
@@ -323,7 +377,7 @@ var Styles=StyleSheet.create({
     justifyContent: 'center',
   },
   smallYellowContainer: {
-    backgroundColor: yellow,
+    backgroundColor: black,
     alignItems: 'center',
   },
   infoText: {
@@ -337,7 +391,7 @@ var Styles=StyleSheet.create({
   },
   titleText: {
     fontSize: 75,
-    color: black,
+    color: gold,
     fontWeight: 'bold',
     marginTop: 40,
     marginBottom: 40,
@@ -358,6 +412,7 @@ var Styles=StyleSheet.create({
     marginTop: 20,
   },
   usernameInput: {
+    marginTop: 20,
     flexDirection: 'row',
     height: 72,
     //backgroundColor: 'green',

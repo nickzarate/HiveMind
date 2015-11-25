@@ -3,13 +3,13 @@
 var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
-var SignupPage = require('./app/components/SignupPage');
-var EnterLoginInformation = require('./app/components/EnterLoginInformation');
+var LoginPage = require('./app/components/LoginPage');
 var EnterDemographics = require('./app/components/EnterDemographics');
 var MainPage = require('./app/components/MainPage');
 var HealthHome = require('./app/components/HealthHome');
 var EducationHome = require('./app/components/EducationHome');
 var HealthQuestion = require('./app/components/HealthQuestion');
+var SignUpPage = require('./app/components/SignUpPage');
 var styles=require('hivemind/app/Styles');
 
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
@@ -31,10 +31,10 @@ var hivemind = React.createClass ({
   },
   
   _renderScene: function(route, nav) {
-    var Component = SignupPage
+    var Component = LoginPage
     
     if (route.id === 2) {
-      Component = EnterLoginInformation
+      Component = SignUpPage
     } else if (route.id === 3) {
       Component = EnterDemographics
     } else if (route.id === 4) {
