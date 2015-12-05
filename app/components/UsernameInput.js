@@ -3,6 +3,9 @@
 var React = require('react-native');
 var styles = require('hivemind/app/Styles');
 
+// <Image source={require('./usernamePic.png')} style={styles.iconTest}/>
+
+
 var {
   View,
   Image,
@@ -29,17 +32,18 @@ var UsernameInput = React.createClass ({
   render: function() {
     return (
       <View style={styles.usernameInput}>
-        <TextInput style={styles.inputTest}
+        <TextInput
+        onFocus={this.props.onFocus}
+        style={styles.inputTest}
         placeholder=' EMAIL'
         value={this.state.email}
         onChange={this.handleEmailChange}
-        autoFocus={true}
-        enablesReturnKeyAutomatically={true}
         selectTextOnFocus={true}
         keyboardType={'email-address'}
         onEndEditing={this.handleEmailSubmit}/>
 
-        <Image source={require('./usernamePic.png')} style={styles.iconTest}/>
+        <Image source={require('image!usernamePic')} style={styles.iconTest}/>
+        
       </View>
     );
   }

@@ -14,10 +14,10 @@ var {
   TouchableHighlight,
 } = React;
 
-var HealthQuestionAnswer = React.createClass ({
+var EducationQuestionAnswer = React.createClass ({
 
   componentDidMount: function() {
-    console.log("in health answer question did mount function");
+    console.log("in education answer question did mount function");
   },
 
   decrementWax: function(answerIndex) {
@@ -29,18 +29,18 @@ var HealthQuestionAnswer = React.createClass ({
       currentUser.increment("honey", points);
       currentUser.save();
 
-      var saveAnswer = function(healthAnswer) {
-        currentUser.get("answerHistory").add("healthData", healthAnswer);//answerHistory.healthData.add("healthAnswer", healthAnswer);                
+      var saveAnswer = function(educationAnswer) {
+        currentUser.get("answerHistory").add("educationData", educationAnswer);//answerHistory.healthData.add("healthAnswer", healthAnswer);                
         currentUser.save();
       };
 
-      var HealthAnswer = Parse.Object.extend("HealthAnswer");
-      var healthAnswer = new HealthAnswer();
-      healthAnswer.set("healthQuestion", this.props.questionPointer);
-      healthAnswer.set("answers", answers);
-      healthAnswer.save({
-        success: function(healthAnswer) {
-          saveAnswer(healthAnswer);
+      var EducationAnswer = Parse.Object.extend("EducationAnswer");
+      var educationAnswer = new EducationAnswer();
+      educationAnswer.set("educationQuestion", this.props.questionPointer);
+      educationAnswer.set("answers", answers);
+      educationAnswer.save({
+        success: function(educationAnswer) {
+          saveAnswer(educationAnswer);
         },
         error: function(error) {
           console.log("in error");
@@ -70,4 +70,4 @@ var HealthQuestionAnswer = React.createClass ({
   }
 });
 
-module.exports = HealthQuestionAnswer;
+module.exports = EducationQuestionAnswer;

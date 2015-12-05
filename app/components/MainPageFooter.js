@@ -28,8 +28,8 @@ var MainPageFooter = React.createClass ({
           <View style={styles.mainPageFooter}>
             <Text style={styles.back}> HOME </Text>
           </View>
-          <View style={styles.mainPageFooter}>
-            <Text style={styles.unchosen} onPress={this.switchToBar}> ---- </Text>
+          <View style={styles.mainPageFooter}  onPress={this.switchToBar}>
+            <Image source={require('image!deactivatedMore')} style={styles.more} onPress={this.switchToBar}/>
           </View>
         </View>
       );
@@ -40,7 +40,7 @@ var MainPageFooter = React.createClass ({
             <Text style={styles.unchosen} onPress={this.switchToHome}> HOME </Text>
           </View>
           <View style={styles.mainPageFooter}>
-            <Text style={styles.back}> ---- </Text>
+            <Image source={require('image!activatedMore')} style={styles.more}/>
           </View>
         </View>
       );

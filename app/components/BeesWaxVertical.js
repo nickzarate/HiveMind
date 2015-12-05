@@ -10,7 +10,7 @@ var {
 var BeesWaxVertical = React.createClass ({
   render: function() {
     return (
-      <Image source={require('./BeesWax.png')} style={styles.iconVertical}/>
+      <Image source={require('image!BeesWax')} style={styles.iconVertical}/>
     );
   }
 });

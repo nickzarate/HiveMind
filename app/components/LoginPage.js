@@ -38,6 +38,7 @@ FBSDKAccessToken.getCurrentAccessToken(token => {
     token2 = token
   }
 });
+
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
 
 var {
@@ -47,6 +48,7 @@ var {
   Navigator,
   TextInput,
   StyleSheet,
+  ScrollView,
   TouchableHighlight,
 } = React;
 
@@ -139,32 +141,37 @@ var LoginPage = React.createClass({
     this.props.navigator.push({id: 2});
   },
 
+  scrollDown: function() {
+    this.refs.scrollView.scrollTo(220);
+  },
+
   render: function() {
     return (
-      <View>
-        <View style={styles.smallYellowContainer}>
-          <Text style={styles.titleText}> HIVEMIND </Text>
-        </View>
-        <View style={styles.smallBlackContainer}>
-
-          <TouchableHighlight style={styles.blueButton} onPress={this._handleFacebookPress}>
-            <Text style={styles.signUpButtonTextBlue}> Connect to Facebook </Text>
-          </TouchableHighlight>
-
-          <Text style={styles.orText}> OR </Text>
-          <UsernameInput onEmailChange={this.setEmailState}/>
-          <PasswordInput onPasswordChange={this.setPasswordState}/>
-
-          <TouchableHighlight style={styles.loginButton} onPress={this.loginUser}>
-            <Text style={styles.loginText}>LOGIN</Text>
-          </TouchableHighlight>
-
-          <View style={styles.rowContainer}>
-            <Text style={styles.disclosureText}>Forgot Password?</Text>
-            <Text style={styles.disclosureText} onPress={this.switchToSignUpPage}>Don't have an account?</Text>
+      <View style={styles.backgroundContainer}>
+        <ScrollView ref="scrollView" style={styles.scrollView}>
+          <View style={styles.smallYellowContainer}>
+            <Text style={styles.titleText}> HIVEMIND </Text>
           </View>
+          <View style={styles.smallBlackContainer}>
 
-        </View>
+            <TouchableHighlight style={styles.blueButton} onPress={this._handleFacebookPress}>
+              <Text style={styles.signUpButtonTextBlue}> Connect to Facebook </Text>
+            </TouchableHighlight>
+
+            <Text style={styles.orText}> OR </Text>
+            <UsernameInput onFocus={this.scrollDown} onEmailChange={this.setEmailState}/>
+            <PasswordInput onFocus={this.scrollDown} onPasswordChange={this.setPasswordState}/>
+
+            <TouchableHighlight style={styles.loginButton} onPress={this.loginUser}>
+              <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableHighlight>
+
+            <View style={styles.rowContainer}>
+              <Text style={styles.disclosureText}>Forgot Password?</Text>
+              <Text style={styles.disclosureText} onPress={this.switchToSignUpPage}>Don't have an account?</Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }

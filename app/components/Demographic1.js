@@ -41,7 +41,7 @@ var Demographic1 = React.createClass ({
           <Text style={styles.back}> Honey </Text>
         </TouchableHighlight>
       </View>
-      );
+    );
   }
 });
 

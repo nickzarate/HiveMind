@@ -114,10 +114,7 @@ var SignUpPage = React.createClass ({
           <TouchableHighlight style={styles.loginButton} onPress={this.captureUser}>
             <Text style={styles.loginText}>SIGN UP</Text>
           </TouchableHighlight>
-
-       
-        <Text style={styles.back}>{this.state.username}</Text>
-        <Text style={styles.back}>{this.state.password}</Text>
+          
       </View>
     );
   }

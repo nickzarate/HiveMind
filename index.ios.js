@@ -9,8 +9,9 @@ var MainPage = require('./app/components/MainPage');
 var HealthHome = require('./app/components/HealthHome');
 var EducationHome = require('./app/components/EducationHome');
 var HealthQuestion = require('./app/components/HealthQuestion');
+var EducationQuestion = require('./app/components/EducationQuestion')
 var SignUpPage = require('./app/components/SignUpPage');
-var styles=require('hivemind/app/Styles');
+var styles = require('hivemind/app/Styles');
 
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
 
@@ -45,6 +46,8 @@ var hivemind = React.createClass ({
       Component = EducationHome
     } else if (route.id === 7) {
       Component = HealthQuestion
+    } else if (route.id === 8) {
+      Component = EducationQuestion
     }
     return <Component navigator={nav}/>
   },
@@ -54,13 +57,13 @@ var hivemind = React.createClass ({
      if (currentUser) {
        return (
          <Navigator
-           initialRoute={{id: 1}}
+           initialRoute={{id: 4}}
            renderScene={this._renderScene} />
        );
      } else {
       return (
         <Navigator
-          initialRoute={{id: 1,}}
+          initialRoute={{id: 1}}
           renderScene={this._renderScene} />
       );
     }

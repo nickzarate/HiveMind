@@ -29,18 +29,16 @@ var PasswordInput = React.createClass ({
   render: function() {
     return (
       <View style={styles.passwordInput}>
-        
         <TextInput
+          onFocus={this.props.onFocus}
           style={styles.inputTest}
           placeholder=' PASSWORD'
           value={this.state.password}
           onChange={this.handlePasswordChange}
-          enablesReturnKeyAutomatically={true}
           selectTextOnFocus={true}
           secureTextEntry={true}
           onEndEditing={this.handlePasswordSubmit} />
-
-        <Image source={require('./PasswordPic.png')} style={styles.iconTest}/>
+        <Image source={require('image!PasswordPic')} style={styles.iconTest}/>
       </View>
     );
   }
