@@ -4,8 +4,8 @@ var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
 var styles = require('hivemind/app/Styles');
-var BeesWaxHeader = require('./BeesWaxHeader');
-var Answer = require('./Answer');
+var BeesWaxHeader = require('hivemind/app/components/BeesWaxHeader');
+var Answer = require('hivemind/app/components/Answer');
 var answers = [0,0,0,0,0,0];
 
 var {

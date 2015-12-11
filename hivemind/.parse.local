@@ -1,0 +1,11 @@
+{
+  "applications": {
+    "_default": {
+      "link": "hivemind"
+    },
+    "hivemind": {
+      "parseAppId": "JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK",
+      "herokuAppId": "e02c0689-ce77-444e-9d10-c60758dc9689"
+    }
+  }
+}

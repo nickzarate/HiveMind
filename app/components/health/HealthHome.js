@@ -4,7 +4,7 @@ var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
 var styles = require('hivemind/app/Styles');
-var BeesWax = require('./BeesWax');
+var BeesWax = require('hivemind/app/components/BeesWax');
 
 var numDummyData = 100;
 var answers = ["0-20", "20-40", "40-60", "60-80", "80-100", "other"];

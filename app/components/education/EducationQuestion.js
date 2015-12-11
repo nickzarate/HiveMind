@@ -4,7 +4,7 @@ var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
 var styles = require('hivemind/app/Styles');
-var BeesWaxHeader = require('./BeesWaxHeader');
+var BeesWaxHeader = require('hivemind/app/components/BeesWaxHeader');
 var EducationQuestionBody = require('./EducationQuestionBody');
 var EducationQuestionAnswer = require('./EducationQuestionAnswer');
 
@@ -22,10 +22,10 @@ var questionPointer;
 var EducationQuestion = React.createClass ({
   getInitialState: function() {
     return {
-      numWax: 6,
+      numWax: 11,
       yearsExperience: 0,
       yearsEducation: 0,
-      answers: ["", "", "", "", "", ""],
+      answers: ["", "", "", "", "", "", "", "", ""],
       answer: 5,
       observationID: 0,
     };
@@ -68,7 +68,12 @@ var EducationQuestion = React.createClass ({
   },
 
   goHome: function() {
-    this.props.navigator.pop();
+    console.log(this)
+    if (this.props.router.count > 1) {
+      this.props.navigator.push({id: 'education question', count: this.props.router.count - 1, newRound: false})
+    } else {
+      this.props.navigator.push({id: 'education stats'})
+    }
   },
 
   render: function() {
@@ -87,7 +92,8 @@ var EducationQuestion = React.createClass ({
         numWax={this.state.numWax}
         onDecrement={this.decrementWax}
         onAnswered={this.goHome}
-        questionPointer={questionPointer}/>
+        questionPointer={questionPointer}
+        newRound={this.props.router.newRound}/>
 
       </View>
     );

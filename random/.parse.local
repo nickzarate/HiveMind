@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "hivemind"
+    },
+    "hivemind": {
+      "applicationId": "JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK"
+    }
+  }
+}

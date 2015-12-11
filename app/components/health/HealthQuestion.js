@@ -4,7 +4,7 @@ var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
 var styles = require('hivemind/app/Styles');
-var BeesWaxHeader = require('./BeesWaxHeader');
+var BeesWaxHeader = require('hivemind/app/components/BeesWaxHeader');
 var HealthQuestionBody = require('./HealthQuestionBody');
 var HealthQuestionAnswer = require('./HealthQuestionAnswer');
 
@@ -54,7 +54,7 @@ var HealthQuestion = React.createClass ({
         updateState(question);
       },
       error: function(object, error) {
-        //alert("Couldn't find the object you were looking for");
+        alert("Couldn't find the object you were looking for");
       }
     });
   },

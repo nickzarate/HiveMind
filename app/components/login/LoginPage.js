@@ -6,8 +6,6 @@ var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
 var UsernameInput = require('./UsernameInput');
 var PasswordInput = require('./PasswordInput');
-var Line = require('./Line');
-//var {Icon,} = require('hivemind/react-native-icons');
 
 var FBSDKLogin = require('hivemind/node_modules/react-native-fbsdklogin');
 var {
@@ -19,10 +17,8 @@ var {
   FBSDKAccessToken,
   FBSDKGraphRequest,
 } = FBSDKCore;
-var token2;
 
 //EXAMPLE FOR GETTING A USERS CHARACTERISTCS : (age-range)
-
 var fetchFriendsRequest = new FBSDKGraphRequest((error, result) => {
   if (error) {
     alert('Error making request.');
@@ -32,12 +28,14 @@ var fetchFriendsRequest = new FBSDKGraphRequest((error, result) => {
 }, '/me/?fields=age_range');
 
 //EXAMPLE FOR GETTING A USERS ACCESS TOKEN
-
-FBSDKAccessToken.getCurrentAccessToken(token => {
-  if (token) {
-    token2 = token
+var token;
+FBSDKAccessToken.getCurrentAccessToken(tempToken => {
+  if (tempToken) {
+    token = tempToken
   }
 });
+//EXAMPLE END-----------------------------
+
 
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
 
@@ -52,37 +50,6 @@ var {
   TouchableHighlight,
 } = React;
 
-
-// <FBSDKLoginButton
-//             onLoginFinished={(error, result) => {
-//               if (error) {
-//                 alert('Error logging in.');
-//               } else {
-//                 if (result.isCancelled) {
-//                   alert('Login cancelled.');
-//                 } else {
-//                   //fetchFriendsRequest.start();
-//                   this.props.navigator.push({id: 3});
-//                 }
-//               }
-//             }}
-//             // onLogoutFinished={}
-//             readPermissions={['public_profile']}
-//             publishPermissions={[]}
-//           />
-
-// <TouchableHighlight style={styles.button} onPress={this._handlePress}>
-//             <Text style={styles.signUpButtonText}> Sign in with Email Address </Text>
-//           </TouchableHighlight>
-
-// <View style={styles.rowContainer}>
-//             <Image source={require('./line.png')} style={styles.leftLine}/>
-//             <Text style={styles.orText}> OR </Text>
-//             <Image source={require('./line.png')} style={styles.rightLine}/>
-//           </View>
-
-
-
 var LoginPage = React.createClass({
   getInitialState: function() {
     return {
@@ -92,19 +59,40 @@ var LoginPage = React.createClass({
   },
 
   _handlePress: function() {
-    this.props.navigator.push({id: 2})
+    this.props.navigator.push({id: 'signup'})
   },
 
   _handleFacebookPress: function() {
-    //FBSDKLoginManager.setLoginBehavior(GlobalStore.getItem('behavior', 'native'));
-    FBSDKLoginManager.logInWithReadPermissions([], (error, result) => {
+    var that = this;
+    FBSDKLoginManager.logInWithReadPermissions(["email", "user_friends"], (error, result) => {
       if (error) {
         alert('Error logging in.');
       } else {
-        if (result.isCanceled) {
+        if (result.isCancelled) {
           alert('Login cancelled.');
         } else {
-          this.props.navigator.push({id: 3});
+          console.log(result);
+          // var authData = {
+          //   id: result.credentials.userId,
+          //   access_token: result.credentials.token,
+          //   expiration_date: result.credentials.tokenExpirationDate
+          // };
+
+          // console.log(authData.id);
+          // console.log(authData.access_token);
+          // console.log(authData.expiration_date);
+
+          Parse.FacebookUtils.logIn(authdata, {
+            success: function(user) {
+              if (user.existed()) {
+                console.log('user already logged in');
+                that.props.navigator.push({id: 'home'});
+              } else {
+                console.log('getting additional user information');
+              }
+            }
+          })
+          this.props.navigator.push({id: 'home'});
         }
       }
     });
@@ -112,15 +100,16 @@ var LoginPage = React.createClass({
 
   loginUser: function() {
     var login = function() {
-      this.props.navigator.push({id: 4});
+      this.props.navigator.push({id: 'home'});
     }.bind(this);
+    var that = this;
 
     Parse.User.logIn(this.state.email, this.state.password, {
       success: function(user) {
-        login();
+        that.props.navigator.push({id: 'home'});
       },
       error: function(user, error) {
-        console.log("Incorrect email or password, try again!")
+        console.log("Incorrect email or password, try again!");
       },
     });
   },
@@ -138,7 +127,7 @@ var LoginPage = React.createClass({
   },
 
   switchToSignUpPage: function() {
-    this.props.navigator.push({id: 2});
+    this.props.navigator.push({id: 'signup'});
   },
 
   scrollDown: function() {

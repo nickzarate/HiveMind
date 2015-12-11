@@ -3,8 +3,8 @@
 var React = require('react-native');
 var Parse = require('parse/react-native');
 var styles=require('hivemind/app/Styles');
-var UsernameInput = require('./UsernameInput');
-var PasswordInput = require('./PasswordInput');
+var UsernameInput = require('./login/UsernameInput');
+var PasswordInput = require('./login/PasswordInput');
 
 //var Parse = require('parse').Parse;
 //var ParseReact = require('parse-react');
@@ -71,20 +71,31 @@ var SignUpPage = React.createClass ({
 
   successful: function() {
     console.log("before push");
-    this.props.navigator.push({id: 3})
+    this.props.navigator.push({id: 'home'})
     console.log("after push");
   },
 
   captureUser: function() {
+    
     var proceed = function(user) {
-
       //Give the new user an empty answer history!
       var AnswerHistory = Parse.Object.extend("AnswerHistory");
       var answerHistory = new AnswerHistory();
-      answerHistory.save();
-      user.set("answerHistory", answerHistory);
+      answerHistory.save({
+        success: function(answerHistory) {
+          user.set("answerHistory", answerHistory);
+          user.set("honey", 0);
+          user.save({
+            success: function() {
+              push();
+            }
+          });
+        }
+      });
+      var push = function() {
+        this.props.navigator.push({id: 'home'});
+      }.bind(this);
 
-      this.props.navigator.push({id: 3});
     }.bind(this);
 
     var user = new Parse.User();
@@ -92,11 +103,17 @@ var SignUpPage = React.createClass ({
     user.set("email", this.state.email);
     user.set("password", this.state.password);
 
+    console.log(this.state.email);
+    console.log(this.state.username);
+    console.log(this.state.password);
+
     user.signUp(null, {
       success(user) {
         proceed(user);
       },
       error(user, error) {
+        console.log(user);
+        console.log(error);
         alert("Error: " + error.code + " " + error.message);
       }
     });

@@ -3,14 +3,7 @@
 var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
-var LoginPage = require('./app/components/LoginPage');
-var EnterDemographics = require('./app/components/EnterDemographics');
-var MainPage = require('./app/components/MainPage');
-var HealthHome = require('./app/components/HealthHome');
-var EducationHome = require('./app/components/EducationHome');
-var HealthQuestion = require('./app/components/HealthQuestion');
-var EducationQuestion = require('./app/components/EducationQuestion')
-var SignUpPage = require('./app/components/SignUpPage');
+//var EnterDemographics = require('./app/components/demographics/EnterDemographics');
 var styles = require('hivemind/app/Styles');
 
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");
@@ -32,38 +25,39 @@ var hivemind = React.createClass ({
   },
   
   _renderScene: function(route, nav) {
-    var Component = LoginPage
+    //Default Component
+    var Component = require('./app/components/login/LoginPage')
     
-    if (route.id === 2) {
-      Component = SignUpPage
-    } else if (route.id === 3) {
-      Component = EnterDemographics
-    } else if (route.id === 4) {
-      Component = MainPage
-    } else if (route.id === 5) {
-      Component = HealthHome
-    } else if (route.id === 6) {
-      Component = EducationHome
-    } else if (route.id === 7) {
-      Component = HealthQuestion
-    } else if (route.id === 8) {
-      Component = EducationQuestion
+    if (route.id === 'signup') {
+      Component = require('./app/components/SignUpPage')
+    } else if (route.id === 'home') {
+      Component = require('./app/components/home/MainPage')
+    } else if (route.id === 'health home') {
+      Component = require('./app/components/health/HealthHome')
+    } else if (route.id === 'education home') {
+      Component = require('./app/components/education/EducationHome')
+    } else if (route.id === 'health question') {
+      Component = require('./app/components/health/HealthQuestion')
+    } else if (route.id === 'education question') {
+      Component = require('./app/components/education/EducationQuestion')
+    } else if (route.id === 'education stats') {
+      Component = require('./app/components/education/EducationStats')
     }
-    return <Component navigator={nav}/>
+    return <Component navigator={nav} router={route}/>
   },
 
   render: function() {
     var currentUser = Parse.User.currentAsync();
-     if (currentUser) {
-       return (
-         <Navigator
-           initialRoute={{id: 4}}
-           renderScene={this._renderScene} />
-       );
-     } else {
+    if (currentUser) {
       return (
         <Navigator
-          initialRoute={{id: 1}}
+          initialRoute={{id: 'home'}}
+          renderScene={this._renderScene} />
+      );
+    } else {
+      return (
+        <Navigator
+          initialRoute={{id: 'login'}}
           renderScene={this._renderScene} />
       );
     }

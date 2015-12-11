@@ -22,11 +22,15 @@ var MainPage = React.createClass ({
     };
   },
 
-  switchToCategory: function(category) {
+  startRound: function(category) {
     if (category === 1) {
-      this.props.navigator.push({id: 5})
+      this.props.navigator.push({id: 'health question'})
     } else if (category === 2) {
-      this.props.navigator.push({id: 6})
+      this.props.navigator.push({
+        id: 'education question',
+        count: 1,
+        newRound: true,
+      })
     }
   },
 
@@ -43,7 +47,7 @@ var MainPage = React.createClass ({
     }
     return (
       <View>
-        <Component health={this.switchToCategory}/>
+        <Component category={this.startRound}/>
         <MainPageFooter mainScreen={this.state.mainScreen} onScreenChange={this.switchScreen}/>
       </View>
     );

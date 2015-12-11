@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var styles = require('hivemind/app/Styles');
-var BeesWaxHeaderVertical = require('./BeesWaxHeaderVertical');
+var BeesWaxHeader = require('./BeesWaxHeader');
 var Answer = require('./Answer');
 
 var {
@@ -31,7 +31,7 @@ var Answer = React.createClass ({
   render: function() {
     return (
       <View style={styles.horizontalAnswer}>
-        <BeesWaxHeaderVertical style={styles.beesWaxHeaderVertical} numWax={this.state.numWax}/>
+        <BeesWaxHeader style={styles.beesWaxHeader} numWax={this.state.numWax}/>
         <TouchableHighlight style={styles.answer} onPress={this.addWax}>
           <Text style={styles.answerText}> {this.props.text} </Text>
         </TouchableHighlight>
