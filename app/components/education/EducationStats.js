@@ -16,8 +16,9 @@ var {
 
 var EducationStats = React.createClass ({
   goHome: function() {
-    Parse.Cloud.run('hello', {movie: 'the matrix'}, {
+    Parse.Cloud.run('analyzeRound', {movie: 'matrix'}, {
       success: function(message) {
+        console.log("MESSAGE HERE")
         console.log(message);
       },
       error: function(error) {

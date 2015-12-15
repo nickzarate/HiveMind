@@ -22,7 +22,7 @@ var questionPointer;
 var HealthQuestion = React.createClass ({
   getInitialState: function() {
     return {
-      numWax: 6,
+      numWax: 2,
       overall_health: 0,
       weekly_exercise_minutes: 0,
       answers: ["", "", "", "", "", ""],

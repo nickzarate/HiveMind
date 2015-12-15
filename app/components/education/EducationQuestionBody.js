@@ -9,6 +9,7 @@ var BeesWaxHeader = require('hivemind/app/components/BeesWaxHeader');
 var {
   View,
   Text,
+  TextInput,
 } = React;
 
 
@@ -18,6 +19,21 @@ var {
 
 
 var EducationQuestionBody = React.createClass ({
+  getInitialState: function() {
+    return {
+      estimate: '',
+    };
+  },
+
+  handleEstimateChange: function(event) {
+    this.setState ({
+      estimate: event.nativeEvent.text
+    });
+  },
+
+  handleEstimateSubmit: function() {
+    this.props.onEstimateChange(this.state.estimate);
+  },
 
   render: function() {
     return (
@@ -25,6 +41,13 @@ var EducationQuestionBody = React.createClass ({
         <Text style={styles.infoText}> Years of experience at current job: {this.props.yearsExperience} </Text>
         <Text style={styles.infoText}> Total years of education: {this.props.yearsEducation} </Text>
         <Text style={styles.questionText}> Guess what test subject #{this.props.observationID}'s hourly wage is based on the given information. </Text>
+        
+        <TextInput
+        style={styles.estimateInput}
+        placeholder='Point Estimate'
+        value={this.state.estimate}
+        onChange={this.handleEstimateChange}
+        onEndEditing={this.handleEstimateSubmit}/>
       </View>
     );
   }

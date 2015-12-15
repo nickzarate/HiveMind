@@ -16,10 +16,6 @@ var {
 
 var EducationQuestionAnswer = React.createClass ({
 
-  componentDidMount: function() {
-    console.log("in education answer question did mount function");
-  },
-
   decrementWax: function(answerIndex) {
     answers[answerIndex] += 1;
     this.props.onDecrement();
@@ -30,52 +26,118 @@ var EducationQuestionAnswer = React.createClass ({
       currentUser.save();
       var that = this;
 
-      var saveAnswerToRound = function(educationAnswer) {
-        //Create a new array representing ONE round of education questions/answers
-        var EducationRound = Parse.Object.extend("EducationRound");
-        var educationRound = new EducationRound();
-        educationRound.add("educationAnswers", educationAnswer);
-        educationRound.save({
-          success: function(educationRound) {
-            saveRound(educationRound);
-          },
-          error: function(error) {
-            alert("error " + error.code);
-          }
-        });
-
-        var saveRound = function(educationRound) {
-          currentUser.get("answerHistory").add("educationData", educationRound);
-          currentUser.get("answerHistory").set("latestEducationRound", educationRound)
-          currentUser.save();
-        }.bind(this);
-      };
-
-      var saveAnswer = function(educationAnswer) {
-        console.log(this);
-        if (this.props.newRound) {
-          saveAnswerToRound(educationAnswer);
-        } else {
-          currentUser.get("answerHistory").get("latestEducationRound").add("educationAnswers", educationAnswer);
-          currentUser.save();
-        }
-      }.bind(this);
-
       var EducationAnswer = Parse.Object.extend("EducationAnswer");
       var educationAnswer = new EducationAnswer();
       educationAnswer.set("educationQuestion", this.props.questionPointer);
       educationAnswer.set("answers", answers);
+      var estimate = Number(this.props.estimate);
+      educationAnswer.set("pointEstimate", estimate);
       educationAnswer.save({
         success: function(educationAnswer) {
           saveAnswer(educationAnswer);
         },
         error: function(error) {
-          alert("error " + error.code);
+          alert("Error: " + error.code + " " + error.message);
         }
       });
-      this.props.onAnswered();
-    }
+
+      var saveAnswer = function(educationAnswer) {
+        var answerHistory = currentUser.get("answerHistory");
+        answerHistory.fetch({
+          success: function(answerHistory) {
+            if (that.props.newRound) {
+              console.log("first question");
+              answerHistory.set("latestEducationRound", []);
+            } else {
+              console.log("not the first question");
+            }
+            answerHistory.add("latestEducationRound", educationAnswer);
+            answerHistory.save({
+              success: function() {
+                that.props.onAnswered();
+              },
+              error: function(error) {
+                alert("Couldn't save answer history: Error: " + error.code + " " + error.message);
+              }
+            })
+          },
+          error: function(error) {
+            alert("Couldn't fetch answer history: Error: " + error.code + " " + error.message);
+          }
+        });
+      };
+    };
   },
+
+
+
+
+
+
+
+
+
+
+    //   var saveAnswerToRound = function(educationAnswer) {
+    //     //Create a new array representing ONE round of education questions/answers
+    //     var EducationRound = Parse.Object.extend("EducationRound");
+    //     var educationRound = new EducationRound();
+    //     educationRound.add("educationAnswers", educationAnswer);
+    //     educationRound.save({
+    //       success: function(educationRound) {
+    //         saveRound(educationRound);
+    //       },
+    //       error: function(error) {
+    //         alert("Error: " + error.code + " " + error.message);
+    //       }
+    //     });
+
+    //     var saveRound = function(educationRound) {
+    //       currentUser.get("answerHistory").add("educationData", educationRound);
+
+    //       currentUser.save({
+    //         success: function() {
+    //           that.props.onAnswered();
+    //         },
+    //         error: function(error) {
+    //           alert("Error: " + error.code + " " + error.message);
+    //         }
+    //       });
+    //     }.bind(this);
+    //   }.bind(this);
+
+    //   var deleteLatestRound = function() {
+    //     var answerHistory = currentUser.get("answerHistory");
+    //     answerHistory.fetch({
+    //       success: function(answerHistory) {
+    //         answerHistory.set("latestEducationRound", []);
+    //       },
+    //       error: function(error) {
+    //         alert("Error: " + error.code + " " + error.message);
+    //       }
+    //     });
+    //   }
+
+    //   var saveAnswer = function(educationAnswer) {
+    //     if (this.props.newRound) {
+    //       console.log("first question")
+    //       deleteLatestRound();
+    //       saveAnswerToRound(educationAnswer);
+    //     } else {
+    //       console.log("second question")
+    //       currentUser.get("answerHistory").add("latestEducationRound", educationAnswer);
+    //       currentUser.save({
+    //         success: function() {
+    //           that.props.onAnswered();
+    //         },
+    //         error: function(error) {
+    //           alert("Error: " + error.code + " " + error.message);
+    //         },
+    //       });
+    //     }
+    //   }.bind(this);
+    // }
+  //},
   
   render: function() {
     return (

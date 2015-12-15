@@ -12,6 +12,9 @@ var {
   TouchableHighlight,
 } = React;
 
+// // <Image source={require('image!activatedMore')} style={styles.more}/>
+// <Image source={require('image!deactivatedMore')} style={styles.more} onPress={this.switchToBar}/>
+
 var MainPageFooter = React.createClass ({
   switchToBar: function() {
     this.props.onScreenChange('bar');
@@ -29,7 +32,7 @@ var MainPageFooter = React.createClass ({
             <Text style={styles.back}> HOME </Text>
           </View>
           <View style={styles.mainPageFooter}  onPress={this.switchToBar}>
-            <Image source={require('image!deactivatedMore')} style={styles.more} onPress={this.switchToBar}/>
+            <Text style={styles.unchosen} onPress={this.switchToBar}> ---- </Text>
           </View>
         </View>
       );
@@ -40,7 +43,7 @@ var MainPageFooter = React.createClass ({
             <Text style={styles.unchosen} onPress={this.switchToHome}> HOME </Text>
           </View>
           <View style={styles.mainPageFooter}>
-            <Image source={require('image!activatedMore')} style={styles.more}/>
+            <Text style={styles.back} onPress={this.switchToBar}> ---- </Text>
           </View>
         </View>
       );

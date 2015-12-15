@@ -22,13 +22,20 @@ var questionPointer;
 var EducationQuestion = React.createClass ({
   getInitialState: function() {
     return {
-      numWax: 11,
+      numWax: 3,
       yearsExperience: 0,
       yearsEducation: 0,
       answers: ["", "", "", "", "", "", "", "", ""],
       answer: 5,
       observationID: 0,
+      estimate: 0,
     };
+  },
+
+  setEstimateState: function(estimate) {
+    this.setState({
+      estimate: estimate,
+    });
   },
 
   componentDidMount: function() {
@@ -84,7 +91,8 @@ var EducationQuestion = React.createClass ({
         <EducationQuestionBody
         yearsExperience={this.state.yearsExperience}
         yearsEducation={this.state.yearsEducation}
-        observationID={this.state.observationID}/>
+        observationID={this.state.observationID}
+        onEstimateChange={this.setEstimateState}/>
 
         <EducationQuestionAnswer
         answers={this.state.answers}
@@ -93,7 +101,8 @@ var EducationQuestion = React.createClass ({
         onDecrement={this.decrementWax}
         onAnswered={this.goHome}
         questionPointer={questionPointer}
-        newRound={this.props.router.newRound}/>
+        newRound={this.props.router.newRound}
+        estimate={this.state.estimate}/>
 
       </View>
     );
