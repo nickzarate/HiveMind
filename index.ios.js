@@ -3,7 +3,6 @@
 var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react');
-//var EnterDemographics = require('./app/components/demographics/EnterDemographics');
 var styles = require('hivemind/app/Styles');
 
 Parse.initialize("JnIfTyw9Dl4Uq6MDo4uqnhOYwbWPmdrkBuP2NvnK", "Q2ctnn44ja1FJ9UdSb6sZf4ucLydl8gRRnpIg3M5");

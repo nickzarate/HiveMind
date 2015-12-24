@@ -42,7 +42,7 @@ var MainPage = React.createClass ({
 
   render: function() {
     var Component = HomeScreen;
-    if (this.state.mainScreen === 'bar') {
+    if (this.state.mainScreen === 'more') {
       Component = BarScreen;
     }
     return (
